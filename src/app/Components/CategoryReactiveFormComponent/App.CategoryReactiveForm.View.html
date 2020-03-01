@@ -6,6 +6,14 @@
             <label>Category Row Id: </label>
             <!-- Bind the formCOntrol key from frmCategory to input elements -->
             <input type="text" class="form-control" formControlName="CategoryRowId">
+            <div class="alert alert-danger" *ngIf="frmCategory.controls.CategoryRowId.dirty && !frmCategory.controls.CategoryRowId.valid">
+                <p *ngIf="frmCategory.controls.CategoryRowId.errors.required">CatId is required</p>
+                <p *ngIf="frmCategory.controls.CategoryRowId.errors.minlength">CatId must be 2 digits min</p>
+                <p *ngIf="frmCategory.controls.CategoryRowId.errors.maxlength">CatId must be 6 digits max</p>
+                <p *ngIf="frmCategory.controls.CategoryRowId.errors.pattern">CatId must be numeric</p>
+                <p *ngIf="frmCategory.controls.CategoryRowId.errors.checkEven">CatId must be even</p>
+                <p *ngIf="frmCategory.controls.CategoryRowId.errors.checkUnique(1)">CatId must be even</p>
+            </div>
         </div>
         <div class="form-group">
             <label>Category Id: </label>
@@ -21,7 +29,7 @@
         </div>
         <div class="form-group">
             <input type="button" class="btn btn-warning" (click)="clear()" value="Clear">
-            <input type="submit" value="Save" class="btn btn-success">
+            <input type="submit" [disabled] = "!frmCategory.valid" value="Save" class="btn btn-success">
         </div>
     </form>
 
